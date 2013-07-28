@@ -2,7 +2,7 @@
  * $Id$
  *
  * This file is part of the iText (R) project.
- * Copyright (c) 1998-2012 1T3XT BVBA
+ * Copyright (c) 1998-2013 1T3XT BVBA
  * Authors: Alexander Chingarev, Bruno Lowagie, et al.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -44,6 +44,7 @@
 package com.itextpdf.text.pdf.internal;
 
 import com.itextpdf.text.pdf.PdfAConformanceLevel;
+import com.itextpdf.text.pdf.PdfWriter;
 
 public class PdfA3Checker extends PdfA2Checker {
 
@@ -51,5 +52,8 @@ public class PdfA3Checker extends PdfA2Checker {
         super(conformanceLevel);
     }
 
+    protected void checkFileSpec(PdfWriter writer, int key, Object obj1) {
+        // don't do anything
+    }
 
 }
