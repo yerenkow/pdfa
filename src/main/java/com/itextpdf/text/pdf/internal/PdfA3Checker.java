@@ -53,7 +53,7 @@ public class PdfA3Checker extends PdfA2Checker {
     }
 
     protected void checkFileSpec(PdfWriter writer, int key, Object obj1) {
-        // don't do anything
+    	// don't do anything
     }
 
 }
