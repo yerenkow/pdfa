@@ -249,6 +249,7 @@ public class InvoiceDOM {
     protected void importIncludedNotes(Element parent, int level,
         String notes[][], String[] notesCodes)
             throws DataIncompleteException, InvalidCodeException {
+        if (notes == null) return;
         Node includedNoteNode = parent.getElementsByTagName("ram:IncludedNote").item(0);
         int n = notes.length;
         FreeTextSubjectCode ftsCode = new FreeTextSubjectCode(level);
@@ -1018,14 +1019,16 @@ public class InvoiceDOM {
             if (grossPriceBasisQuantity != null)
                 importContent(sub, "ram:BasisQuantity", DEC4.check(grossPriceBasisQuantity), "unitCode", M_UNIT_CODE.check(grossPriceBasisQuantityCode));
             Node node = sub.getElementsByTagName("ram:AppliedTradeAllowanceCharge").item(0);
-            for (int i = 0; i < grossPriceTradeAllowanceChargeIndicator.length; i++) {
-                Node newNode = node.cloneNode(true);
-                importAppliedTradeAllowanceCharge((Element)newNode,
+            if (grossPriceTradeAllowanceChargeIndicator != null) {
+                for (int i = 0; i < grossPriceTradeAllowanceChargeIndicator.length; i++) {
+                    Node newNode = node.cloneNode(true);
+                    importAppliedTradeAllowanceCharge((Element)newNode,
                         grossPriceTradeAllowanceChargeIndicator[i],
                         grossPriceTradeAllowanceChargeActualAmount[i],
                         grossPriceTradeAllowanceChargeActualAmountCurrencyID[i],
                         grossPriceTradeAllowanceChargeReason[i]);
-                sub.insertBefore(newNode, node);
+                    sub.insertBefore(newNode, node);
+                }
             }
         }
         // ram:NetPriceProductTradePrice
@@ -1053,7 +1056,8 @@ public class InvoiceDOM {
         
         /* ram:SpecifiedTradeProduct */
         sub = (Element)parent.getElementsByTagName("ram:SpecifiedTradeProduct").item(0);
-        importContent(sub, "ram:GlobalID", specifiedTradeProductGlobalID, "schemeID", GI_CODE.check(specifiedTradeProductSchemeID));
+        if (specifiedTradeProductGlobalID != null)
+            importContent(sub, "ram:GlobalID", specifiedTradeProductGlobalID, "schemeID", GI_CODE.check(specifiedTradeProductSchemeID));
         importContent(sub, "ram:SellerAssignedID", specifiedTradeProductSellerAssignedID);
         importContent(sub, "ram:BuyerAssignedID", specifiedTradeProductBuyerAssignedID);
         importContent(sub, "ram:Name", specifiedTradeProductName);

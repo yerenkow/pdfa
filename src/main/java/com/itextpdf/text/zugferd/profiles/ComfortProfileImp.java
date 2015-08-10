@@ -601,6 +601,12 @@ public class ComfortProfileImp extends BasicProfileImp implements ComfortProfile
         paymentMeansPayeeFinancialInstitutionName.add(institutionnameCreditor);
     }
 
+    @Override
+    public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
+            String basisAmount, String basisAmountCurrencyID, String applicablePercent) {
+        throw new UnsupportedOperationException("This method can only be used for the BASIC level.");
+    }
+
     public void addApplicableTradeTax(String calculatedAmount, String calculatedAmountCurrencyID, String typeCode,
             String exemptionReason, String basisAmount, String basisAmountCurrencyID, String categoryCode, String applicablePercent) {
         taxCalculatedAmount.add(calculatedAmount);
