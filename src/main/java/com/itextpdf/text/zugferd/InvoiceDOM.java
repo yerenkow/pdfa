@@ -1184,7 +1184,7 @@ public class InvoiceDOM {
         boolean emptyElement = node.getNodeType() == Node.ELEMENT_NODE
             && node.getChildNodes().getLength() == 0;
         boolean emptyText = node.getNodeType() == Node.TEXT_NODE
-            && node.getNodeValue().trim().isEmpty();
+            && node.getNodeValue().trim().length() == 0;
         if (emptyElement || emptyText) {
             node.getParentNode().removeChild(node);
         }
